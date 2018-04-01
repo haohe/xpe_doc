@@ -1,6 +1,31 @@
 
 <h2>XPE Messaging Service</h2>
 
+
+<h3>Starting server and configurations</h3>
+
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>Name</th>
+            <th>Default value</th>
+            <th>Description</th>
+            <th>Sample</th>
+        </tr>
+        <tr>
+            <td>timeout</td>
+            <td>10000</td>
+            <td>This is the heartbeat interval for MS.  The MS will send out a heartbeat out to keep a TCP connection alive for every timeout milliseconds</td>
+            <td>timeout=10000</td>
+        </tr>
+        <tr>
+            <td>xpeBase</td>
+            <td>work</td>
+            <td>This is the default work directory</td>
+            <td>xpeBase=work</td>
+        </tr>
+    </table>
+
+
     
 <h3>Introduction</h3>
 
