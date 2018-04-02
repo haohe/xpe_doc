@@ -5,34 +5,34 @@
 <h3>Configurations</h3>
 
 <table class="table table-striped">
- <tr>
-            <th>Attribute</th>
+<tr>
+<th>Attribute</th>
             <th>Description</th>
             <th>Example</th>
         </tr>
-        <tr>
-            <td>ns</td>
-            <td>The name space of the request payload</td>
-            <td>The simplest form would be ns="http://example.com". To declare multiple namespaces, ns="xmlns:n1='http://namesapce1.com' xmlns:n2='http://namespace2.com'"</td>
+<tr>
+<td>ns</td>
+<td>The name space of the request payload</td>
+<td>The simplest form would be ns="http://example.com". To declare multiple namespaces, ns="xmlns:n1='http://namesapce1.com' xmlns:n2='http://namespace2.com'"</td>
         </tr>
-        <tr>
-            <td>endPoint</td>
-            <td>The actual SOAP service address</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>wsdl</td>
-            <td>The path to the WSDL file</td>
-            <td>The URL address to the remote WSDL file.</td>
-        </tr>
-    </table>
+<tr>
+<td>endPoint</td>
+<td>The actual SOAP service address</td>
+<td></td>
+ </tr>
+ <tr>
+<td>wsdl</td>
+<td>The path to the WSDL file</td>
+<td>The URL address to the remote WSDL file.</td>
+</tr>
+</table>
 
 <h3>Rules for converting JSON to XML</h3>
     	
 <p>In the following examples, SOAP envolopes are removed for simplicity.  Each request will be embedded into SOAP automatically.</p>
 
 <table class="table table-striped">
-        <tr>
+<tr>
             <th>Rule</th>
             <th>JSON</th>
             <th>XML</th>
@@ -89,9 +89,9 @@
 ```
             </td>
         </tr>
-        <tr>
-            <td>Arrays are converted into a parent with repeating child elements</td>
-            <td>
+<tr>
+<td>Arrays are converted into a parent with repeating child elements</td>
+<td>
                 
 ```json
 {
@@ -114,28 +114,27 @@
     }
 }                
 ```
-            </td>
-            <td>
+</td>
+<td>
 ```xml
 <ser:calculateProductsFee xmlns:ser="http://service.call.sms.star.com" xmlns:dto="http://dto.service.call.sms.star.com"><ser:in0>?</ser:in0><ser:in1><dto:OrderProductInfo><dto:orderCycles>?</dto:orderCycles><dto:productCode>?</dto:productCode><dto:productId>?</dto:productId></dto:OrderProductInfo><dto:OrderProductInfo><dto:orderCycles>?</dto:orderCycles><dto:productCode>?</dto:productCode><dto:productId>?</dto:productId></dto:OrderProductInfo></ser:in1></ser:calculateProductsFee>                    <queryStbInfo><in0>?</in0><in1>?</in1></queryStbInfo>
 ```
 </td>
-        </tr>
-    </table>
+</tr>
+</table>
     
     
-<h3>Rules for converting SOAP to JSON</h3>
-    	
+<h3>Rules for converting SOAP to JSON</h3>    	
 
 <table class="table table-striped">
-        <tr>
-            <th>Rule</th>
+<tr>
+<th>Rule</th>
             <th>SOAP</th>
             <th>JSON</th>
         </tr>
         <tr>
-            <td>XML elements will be converted into JSON objects and SOAP envelop will be removed</td>
-            <td>
+<td>XML elements will be converted into JSON objects and SOAP envelop will be removed</td>
+<td>
 ```xml
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.call.sms.star.com" xmlns:out="http://outter.model.sms.star.com">
    <soapenv:Header/>
@@ -203,9 +202,8 @@
     }
 }
 ```
-            </td>
-        </tr>
-        
+</td>
+</tr>       
 <tr>
 <td>Repeating XML elements will be converted into JSON array if the schema indicates so</td>
 <td>
@@ -271,8 +269,8 @@
     </soap:Body>
 </soap:Envelope>
 ```
-            </td>
-            <td>
+</td>
+<td>
 ```json
 {
     "queryProductsOrderHistoryResponse": {
@@ -337,7 +335,6 @@
 ```
             </td>
         </tr>
-        
-    </table>    
+ </table>    
     
     
