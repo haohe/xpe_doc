@@ -1,0 +1,120 @@
+<h2>XPE JSON Web Token Specification</h2>
+  
+  <h3>Introduction</h3>
+  
+  <p>XPE JSON Web Token (XJWT) is a simple and reliable cross domain SSO solution based on the popular JSON Web Token (JWT) approach.  However, it is not compatiable with the JWT defined in RFC 7519.
+      The reason that we need to define this new specification is because the RFC 7519 is not secure and too verbose.  
+  </p>
+  
+  <h3>The overall structure of XJWT </h3>
+  
+  <p>An XJWT has three parts: header, payload, and signature separated by two '.'.   </p>
+
+  <h4>The header</h4>
+  
+  <p>The header has the following raw structure:</p>
+  
+  <pre>
+      [expiry:long][version:byte]
+  </pre>
+  
+    <table class="table table-striped">
+        <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+            <th>Type and Values</th>
+        </tr>
+        <tr>
+           <td>Expiry</td>
+           <td>The expiry date in milliseconds .</td>
+           <td>Long. Big endian.</td>
+        </tr>
+        <tr>
+           <td>Type</td>
+           <td>The type of the payload</td>
+           <td>Byte. 0 - reserved.  1 - JSON. 2-SYS </td>
+        </tr>
+    </table>
+    
+    <p>The raw strcutre is then base64 encoded</p>
+    
+    <h4>The payload when type is 1</h4>
+    
+
+    <p>The payload was prepared from a JSON document as the following: </p>
+    
+    <pre>
+       aes256(random long + json + aes padding, aes key)
+    </pre>
+    
+    <p>where aes256 is the AES256 encryption function, the random long is a randomly generated 8 byte long, json is a UTF8 encoded JSON document, aes padding are additional characters for AES padding
+        purpose.
+    </p>
+    
+    <p>The raw strcutre is then base64 encoded</p>
+
+    <h4>The signature</h4> 
+    
+    <p>The signature is computed as the following:</p>
+    
+    <pre>
+        base64(HmacSHA256(based64(raw header) +'.' + base64 (raw payload)), secret key)
+    </pre>
+    
+    
+    <h3>Verification and decryption </h3>
+    
+    <ol>
+        <li>The signature is vefified with the shared secret key, if not valid, the token is discarded.</li>
+        <li>The header is base64 decoded and the expiry time is compared with the current time.  If it has elapsed, then the token is discarded. </li>
+        <li>The header version is read and if it is not supported, then the token is invalid.</li>
+        <li>The payload is based64 decoded and decrypted using the shared aes key. The first 8 bytes of the decrypted messages and the paddings are discarded.  The remaining data is returned.</li>
+    </ol>
+    
+    <h3>JSON data structure</h3>
+    
+    
+    <table class="table table-striped">
+        <tr>
+            <th>Attribute</th>
+            <th>Description</th>
+            <th>Type and Values</th>
+            <th>Required</th>
+        </tr>
+        <tr>
+           <td>ti</td>
+           <td>Timestamp</td>
+           <td>Long. In milliseconds. </td>
+           <td>N</td>
+        </tr>
+        <tr>
+           <td>id</td>
+           <td>User id</td>
+           <td>Int</td>
+           <td>N</td>
+        </tr>
+        <tr>
+           <td>un</td>
+           <td>username</td>
+           <td>string</td>
+           <td>Y</td>
+        </tr>
+        <tr>
+           <td>em</td>
+           <td>email</td>
+           <td>string</td>
+           <td>Y</td>
+        </tr>
+        <tr>
+           <td>ph</td>
+           <td>phone number</td>
+           <td>string</td>
+           <td>N</td>
+        </tr>
+        <tr>
+           <td>dis</td>
+           <td>Display name</td>
+           <td>string</td>
+           <td>N</td>
+        </tr>
+    </table>
