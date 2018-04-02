@@ -97,8 +97,7 @@
     
 <p>Schemas of a DB can be defined using the following notation:</p> 
 
-<pre>
-        {field name}[:type][![default values]][,{fieldname}:[type][![default values]]]
+<pre>{field name}[:type][![default values]][,{fieldname}:[type][![default values]]]
 </pre>
     
 <p>So a schema consists of at least one field and up to 65535 fields can be defined.  However, any db with more than 128 fields will be very unusual and is strongly discouraged. </p>
@@ -109,7 +108,7 @@
 <p>For example, the following schema is used for storing user comments:</p>
     
 ```xml
-        <services dict="id:i,created:t,parent:I!,state:b!1,author,comments"></services>
+<services dict="id:i,created:t,parent:I!,state:b!1,author,comments"></services>
 ```
 
 <p>In the example above, each comment has a id (int type), a created time (timestamp type), a parent reference (unsigned int type), a state (byte type), author and comments. Both author and comments are binary blobs.
@@ -290,7 +289,7 @@
 <p>Sample configuration of a DB:</p>
     
 ```xml
-       <service access="rwrw-w" recAccess="rwrw--" group="staff" store="issues.db" storeType="binary" primaryKey="id" seqKey='true' sorted="id"  dict="id,projId,parentId,title,description,access:b,createDate:t" />
+<service access="rwrw-w" recAccess="rwrw--" group="staff" store="issues.db" storeType="binary" primaryKey="id" seqKey='true' sorted="id"  dict="id,projId,parentId,title,description,access:b,createDate:t" />
 ```
     
 <p>Configuration explained:</p>
@@ -363,12 +362,13 @@
 
 
 <p>In your sitemap.xml, add the following:</p>
+
 ```xml
-        <service store="issues.db" storeType="binary" primaryKey="id" seqKey='true' sorted="id" fields="title,owner,projId^id,parentId,submitter,state^id" dict="id,projId,parentId,title,description,owner,difficulty:b,submitter,type:b,state:b,priority:b,createDate:t">
-            <get path="/json/issue" xpipe="http://www.xmlpipe.org/xpe/db/unique/record/get" /><del path="/json/issue" xpipe="http://www.xmlpipe.org/xpe/db/unique/record/del" />
-            <post path="/json/issues" xpipe="http://www.xmlpipe.org/xpe/db/unique/record/post" />
-            <get path="/json/issues" xpipe="http://www.xmlpipe.org/xpe/db/search" mask="id,projId,parentId,title,description,owner,difficulty,submitter,type,state,priority" />
-        </service>
+<service store="issues.db" storeType="binary" primaryKey="id" seqKey='true' sorted="id" fields="title,owner,projId^id,parentId,submitter,state^id" dict="id,projId,parentId,title,description,owner,difficulty:b,submitter,type:b,state:b,priority:b,createDate:t">
+  <get path="/json/issue" xpipe="http://www.xmlpipe.org/xpe/db/unique/record/get" /><del path="/json/issue" xpipe="http://www.xmlpipe.org/xpe/db/unique/record/del" />
+  <post path="/json/issues" xpipe="http://www.xmlpipe.org/xpe/db/unique/record/post" />
+  <get path="/json/issues" xpipe="http://www.xmlpipe.org/xpe/db/search" mask="id,projId,parentId,title,description,owner,difficulty,submitter,type,state,priority" />
+</service>
 ```
 
 <p>At the top level, we have defined common attributes to be shared by all the pipes. We then defined 4 pipes:
