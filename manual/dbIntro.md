@@ -94,25 +94,31 @@
             <td>UTF8 encoded JSON</td>
         </tr>
     </table>
-    <p>Schemas of a DB can be defined using the following notation:</p> <pre>
-        {field name}[:type][![default values]][,{fieldname}:[type][![default values]]]
-    </pre>
     
-    <p>So a schema consists of at least one field and up to 65535 fields can be defined.  However, any db with more than 128 fields will be very unusual and is strongly discouraged. </p>
-    <p>A field must have a name and optionally a type.  If not specified, the type is defaulted to 's'.  If a field ends with '!', then this field is required.  Default value of a field can be defined
+<p>Schemas of a DB can be defined using the following notation:</p> 
+
+<pre>
+        {field name}[:type][![default values]][,{fieldname}:[type][![default values]]]
+</pre>
+    
+<p>So a schema consists of at least one field and up to 65535 fields can be defined.  However, any db with more than 128 fields will be very unusual and is strongly discouraged. </p>
+<p>A field must have a name and optionally a type.  If not specified, the type is defaulted to 's'.  If a field ends with '!', then this field is required.  Default value of a field can be defined
         after '!'.  Default values are useful when extending a schema and one wants to give all records of a new field with the same value.  
-    </p>
+</p>
 
-    <p>For example, the following schema is used for storing user comments:</p>
-    <xmlSample>
+<p>For example, the following schema is used for storing user comments:</p>
+    
+```xml
         <services dict="id:i,created:t,parent:I!,state:b!1,author,comments"></services>
-    </xmlSample>
-    <p>In the example above, each comment has a id (int type), a created time (timestamp type), a parent reference (unsigned int type), a state (byte type), author and comments. Both author and comments are binary blobs.
-        The parent ends with a ! so the field is required.  The state field has a value of 1 after the ! so its default value is 1.
-    </p>
-     <h3>Limits of XPE DB</h3>
+```
 
-    <table class="table table-striped">
+<p>In the example above, each comment has a id (int type), a created time (timestamp type), a parent reference (unsigned int type), a state (byte type), author and comments. Both author and comments are binary blobs.
+        The parent ends with a ! so the field is required.  The state field has a value of 1 after the ! so its default value is 1.
+</p>
+
+<h3>Limits of XPE DB</h3>
+
+<table class="table table-striped">
         <tr>
             <th>Description</th>
             <th>Limit</th>
@@ -164,20 +170,21 @@
             <td>If present, its value is set to the group id of the group to which this record belongs, currently, only the first 64 are supported. It will be extended to support more groups.</td>
         </tr>
     </table>
-     <h4>Access Control</h4>
+    
+<h4>Access Control</h4>
 
-    <p>System supports up to 63 system groups.</p>
-    <p>A user can belong to 0 or more groups.</p>
-    <p>A user can be uniquely identified by a username, userId (int), or an email.</p>
-    <p>A DB is owned by a group. A DB cannot be owned by an individul user.</p>
-    <p>A record in a DB or a DB itself can define its own access control policy. An access control policy is defined by six chars using the 'rw' notation: '[owner][group][other]'. For example, 'rw----' means that the resource is read and write accessible by
+<p>System supports up to 63 system groups.</p>
+<p>A user can belong to 0 or more groups.</p>
+<p>A user can be uniquely identified by a username, userId (int), or an email.</p>
+<p>A DB is owned by a group. A DB cannot be owned by an individul user.</p>
+<p>A record in a DB or a DB itself can define its own access control policy. An access control policy is defined by six chars using the 'rw' notation: '[owner][group][other]'. For example, 'rw----' means that the resource is read and write accessible by
         the owner only.</p>
-    <p>To enable access control on a DB, one first defines the access policy for the DB by adding the access:b to the dictionary</p>
+<p>To enable access control on a DB, one first defines the access policy for the DB by adding the access:b to the dictionary</p>
     
-    <p>The meaning of read and write access are explained below:</p>
+<p>The meaning of read and write access are explained below:</p>
     
 
-    <table class="table table-striped">
+<table class="table table-striped">
         <tr>
             <th>Access</th>
             <th>Target</th>
