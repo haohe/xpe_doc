@@ -1,19 +1,20 @@
-    	<h2>XPE DB Introduction</h2>
+<h2>XPE DB Introduction</h2>
 
-    	<h3>What is XPE DB and how it works?</h3>
+<h3>What is XPE DB and how it works?</h3>
 
-    <p>XPE DB is designed from ground up using an event driven and log based architecture, which allows fast updates up to the maximum IO bandwidth of the underlying hardware storage. Even wiht modest hardware, XPE DB can achieve one million updates per seconds.</p>
-    <p>Inside XPE DB, even update generates a DB update event, which is published to a number of listeners. Some of those listeners are speciality indexers.</p>
-    <p>Search is performed by one or more indexers. To achieve the best performance, one should consider the usage of a DB and then chooses the most suitable index.</p>
-     <h3>Data model</h3>
+<p>XPE DB is designed from ground up using an event driven and log based architecture, which allows fast updates up to the maximum IO bandwidth of the underlying hardware storage. Even wiht modest hardware, XPE DB can achieve one million updates per seconds.</p>
+<p>Inside XPE DB, even update generates a DB update event, which is published to a number of listeners. Some of those listeners are speciality indexers.</p>
+<p>Search is performed by one or more indexers. To achieve the best performance, one should consider the usage of a DB and then chooses the most suitable index.</p>
+<h3>Data model</h3>
 
-    <p>XPE DB stores records. A record has one more fields. Each field can be considered as a name value pair. The following data types are supported:</p>
-    <h3>Data types and schema</h3>
+<p>XPE DB stores records. A record has one more fields. Each field can be considered as a name value pair. The following data types are supported:</p>
+<h3>Data types and schema</h3>
      
-    <p>XPE DB supports a flexible and extensible schema.  You can add more fields at the end or rename a field.  However, you cannot remove an existing field. </p>
+<p>XPE DB supports a flexible and extensible schema.  You can add more fields at the end or rename a field.  However, you cannot remove an existing field. </p>
 
-    <p>XPE DB supports the following data types (all values are inclusive) with string type as the default type:</p>
-    <table class="table table-striped">
+<p>XPE DB supports the following data types (all values are inclusive) with string type as the default type:</p>
+
+<table class="table table-striped">
         <tr>
             <th>Name</th>
             <th>Size (byte)</th>
