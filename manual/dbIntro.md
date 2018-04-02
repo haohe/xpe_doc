@@ -130,13 +130,15 @@
             <td>16384. Will be less subject to the usages of key values. Each key requires 4 bytes minimum.</td>
         </tr>
     </table>
-     <h3>Unique Key DB</h3>
 
-    <p>XPE DB supports several different types of DB and the most common one is a Unique Key DB. This type of DB must have a primary key for each record and each key must be unique.</p>
+<h3>Unique Key DB</h3>
+
+<p>XPE DB supports several different types of DB and the most common one is a Unique Key DB. This type of DB must have a primary key for each record and each key must be unique.</p>
      <h4>Special fields</h4>
 
-    <p>The following fields carry special meaning and if a dict contains them, they will be handled according to the following table:</p>
-    <table class="table table-striped">
+<p>The following fields carry special meaning and if a dict contains them, they will be handled according to the following table:</p>
+    
+<table class="table table-striped">
         <tr>
             <th>Name</th>
             <th>Description</th>
@@ -205,14 +207,14 @@
         </tr>
     </table>       
     
-    <h4>Extended Group</h4>
+<h4>Extended Group</h4>
 
-    <p>There are only up to 63 system groups, which are normally predefined during the development time. Extended groups can be created at runtime subject to group creation access control policy.
+<p>There are only up to 63 system groups, which are normally predefined during the development time. Extended groups can be created at runtime subject to group creation access control policy.
         Extended groups are defined in a group db.  
     </p>
     
-    <p>Graph DB Dict</p>
-        <table class="table table-striped">
+<p>Graph DB Dict</p>
+<table class="table table-striped">
         <tr>
             <th>Field</th>
             <th>Description</th>
@@ -261,7 +263,7 @@
         
     
     
-    <p>Operations on a group</p>
+<p>Operations on a group</p>
         <table class="table table-striped">
         <tr>
             <th>Operation</th>
@@ -278,15 +280,15 @@
         </table>
 
     
-    <p>Sample configuration of a DB:</p>
+<p>Sample configuration of a DB:</p>
     
-    <xmlSample>
+```xml
        <service access="rwrw-w" recAccess="rwrw--" group="staff" store="issues.db" storeType="binary" primaryKey="id" seqKey='true' sorted="id"  dict="id,projId,parentId,title,description,access:b,createDate:t" />
-    </xmlSample>
+```
     
-    <p>Configuration explained:</p>
+<p>Configuration explained:</p>
     
-    <table class="table table-striped">
+<table class="table table-striped">
         <tr>
             <th>Name</th>
             <th>Description</th>
@@ -305,27 +307,29 @@
         </tr>
     </table>    
     
-    <p>Write right to DB means one can add a new record to the DB.</p>
-    <p>Read right to DB means one can search </p>
+<p>Write right to DB means one can add a new record to the DB.</p>
+<p>Read right to DB means one can search </p>
     
-    <p>Note that we define an "access" attribtue for the DB.  As it is defined, this DB allows all users in group "1" to be able to add to this DB.  If group is not 
+<p>Note that we define an "access" attribtue for the DB.  As it is defined, this DB allows all users in group "1" to be able to add to this DB.  If group is not 
         defined, then everyone can write records to this DB.  Everyone can read the DB.
-    </p>
+</p>
     
-    <p>When a record is added to the DB, it inherits the access policy and the groupId of the DB.</p>
+<p>When a record is added to the DB, it inherits the access policy and the groupId of the DB.</p>
 
 
-    <ol>
+<ol>
         <li>The dict of a DB must include access:b and ownerId:i and optionally groupId:i. Those fields are used by the DB to bookkeep access control information</li>
         <li>Define the groupId of the DB. A DB</li>
         <li>Define the access policy in the DB config with defaultAccessPolicy="rwrwrw" format. The first two chars for owner, the second for group, and the rest is for others.</li>
     </ol>
-     <h4>Indices</h4>
+     
+<h4>Indices</h4>
 
-    <p>A DB is not very useful if one cannot search the DB. What makes XPE DB different is that we assume that a developer knows her data so she will be able to choose the most suitable index for it. The end result is that XPE DB is able to perform very fast
+<p>A DB is not very useful if one cannot search the DB. What makes XPE DB different is that we assume that a developer knows her data so she will be able to choose the most suitable index for it. The end result is that XPE DB is able to perform very fast
         queries typically at the cost of O(1) time. The performance is so high that traditional SQL based DB simply cannot match.</p>
     <p>The following indices are supported:</p>
-    <table class="table table-striped">
+    
+<table class="table table-striped">
         <tr>
             <th>Name</th>
             <th>Description</th>
@@ -347,21 +351,24 @@
             <td>fields="tag^ratings"</td>
         </tr>
     </table>
-     <h4>How to use</h4>
+     
+<h4>How to use</h4>
 
-    <p>In your sitemap.xml, add the following:</p>
-    <xmlSample>
+
+<p>In your sitemap.xml, add the following:</p>
+```xml
         <service store="issues.db" storeType="binary" primaryKey="id" seqKey='true' sorted="id" fields="title,owner,projId^id,parentId,submitter,state^id" dict="id,projId,parentId,title,description,owner,difficulty:b,submitter,type:b,state:b,priority:b,createDate:t">
             <get path="/json/issue" xpipe="http://www.xmlpipe.org/xpe/db/unique/record/get" /><del path="/json/issue" xpipe="http://www.xmlpipe.org/xpe/db/unique/record/del" />
             <post path="/json/issues" xpipe="http://www.xmlpipe.org/xpe/db/unique/record/post" />
             <get path="/json/issues" xpipe="http://www.xmlpipe.org/xpe/db/search" mask="id,projId,parentId,title,description,owner,difficulty,submitter,type,state,priority" />
         </service>
-    </xmlSample>
-    <p>At the top level, we have defined common attributes to be shared by all the pipes. We then defined 4 pipes:
-        <ol>
+```
+
+<p>At the top level, we have defined common attributes to be shared by all the pipes. We then defined 4 pipes:
+<ol>
             <li>The get pipe is used for getting the details of one record so you supply the id of the record to get it back.</li>
             <li>The del pipe is used for deleting a record</li>
             <li>The post pipe is used for creating a record, one simply supplies a valid JSON file to add a new record. If a id is supplied, then the existing record is replaced. If no id is supplied, then a new id is generated by the system.</li>
             <li>The search pipe is used for advanced searches.</li>
         </ol>
-    </p>
+</p>

@@ -1,8 +1,8 @@
 <h2>XPE JSON Web Token Specification</h2>
   
-  <h3>Introduction</h3>
+<h3>Introduction</h3>
   
-  <p>XPE JSON Web Token (XJWT) is a simple and reliable cross domain SSO solution based on the popular JSON Web Token (JWT) approach.  However, it is not compatiable with the JWT defined in RFC 7519.
+<p>XPE JSON Web Token (XJWT) is a simple and reliable cross domain SSO solution based on the popular JSON Web Token (JWT) approach.  However, it is not compatiable with the JWT defined in RFC 7519.
       The reason that we need to define this new specification is because the RFC 7519 is not secure and too verbose.  
   </p>
   
@@ -15,10 +15,10 @@
   <p>The header has the following raw structure:</p>
   
   <pre>
-      [expiry:long][version:byte]
+      [expiry:long][type:byte][issuer id:long]
   </pre>
   
-    <table class="table table-striped">
+<table class="table table-striped">
         <tr>
             <th>Attribute</th>
             <th>Description</th>
@@ -34,44 +34,49 @@
            <td>The type of the payload</td>
            <td>Byte. 0 - reserved.  1 - JSON. 2-SYS </td>
         </tr>
+        <tr>
+           <td>Issuer Id</td>
+           <td>A unique id that uniquely identifies an issuer</td>
+           <td>A ID must be possitive.  0 - 1000 are reserved. </td>
+        </tr>
     </table>
     
-    <p>The raw strcutre is then base64 encoded</p>
+<p>The raw strcutre is then base64 encoded</p>
     
-    <h4>The payload when type is 1</h4>
+<h4>The payload </h4>
     
 
-    <p>The payload was prepared from a JSON document as the following: </p>
+<p>The payload consists of the following: </p>
     
-    <pre>
-       aes256(random long + json + aes padding, aes key)
-    </pre>
+<pre>
+       aes256(random long + body + aes padding, aes key)
+</pre>
     
-    <p>where aes256 is the AES256 encryption function, the random long is a randomly generated 8 byte long, json is a UTF8 encoded JSON document, aes padding are additional characters for AES padding
-        purpose.
-    </p>
+<p>where aes256 is the AES256 encryption function, the random long is a randomly generated 8 byte long, body is the business data to be sent over, aes padding are additional characters for AES padding
+        purpose.  The type defined previously indicates the structure of the body.
+</p>
     
-    <p>The raw strcutre is then base64 encoded</p>
+<p>The raw strcutre is then base64 encoded</p>
 
-    <h4>The signature</h4> 
+<h4>The signature</h4> 
     
-    <p>The signature is computed as the following:</p>
+<p>The signature is computed as the following:</p>
     
-    <pre>
+<pre>
         base64(HmacSHA256(based64(raw header) +'.' + base64 (raw payload)), secret key)
-    </pre>
+</pre>
     
     
-    <h3>Verification and decryption </h3>
+<h3>Verification and decryption </h3>
     
-    <ol>
+<ol>
         <li>The signature is vefified with the shared secret key, if not valid, the token is discarded.</li>
         <li>The header is base64 decoded and the expiry time is compared with the current time.  If it has elapsed, then the token is discarded. </li>
         <li>The header version is read and if it is not supported, then the token is invalid.</li>
         <li>The payload is based64 decoded and decrypted using the shared aes key. The first 8 bytes of the decrypted messages and the paddings are discarded.  The remaining data is returned.</li>
-    </ol>
+</ol>
     
-    <h3>JSON data structure</h3>
+<h3>Body data structure when type is 1 (JSON) </h3>
     
     
     <table class="table table-striped">
@@ -118,3 +123,7 @@
            <td>N</td>
         </tr>
     </table>
+
+### Body data structure when type is 2 (SYS) 
+
+ If not agreed previously, the body is simply three bytes: 'SYS'
