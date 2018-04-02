@@ -12,3 +12,6 @@
         * [自定义菜单](samples/wechart/menu.md)
     * [其它范例](samples/others.md)
 * [Linux 下 XPE 操作命令](Linux_XPE.md)
+* [References]
+    * [MS Server](manual/ms.md)
+    * [XPE DB](manual/dbIntro.md)
