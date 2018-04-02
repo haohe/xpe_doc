@@ -15,3 +15,8 @@
 * [References]
     * [MS Server](manual/ms.md)
     * [XPE DB](manual/dbIntro.md)
+    * [XJWT](manual/jwt.md)
+    * [DB Sync](manual/dbsync.md)
+    * [Sitemap](manual/sitemap.md)
+    * [SOAP](manual/soap.md)
+    
