@@ -33,62 +33,64 @@
 
 <table class="table table-striped">
 <tr>
-            <th>Rule</th>
-            <th>JSON</th>
-            <th>XML</th>
-        </tr>
-        <tr>
-            <td>JSON Objects will be converted into XML elements</td>
-            <td>
+<th>Rule</th>
+<th>JSON</th>
+<th>XML</th>
+</tr>
+<tr>
+ <td>JSON Objects will be converted into XML elements</td>
+ <td>
 ```json
-                        {"name":"value"}
+   {"name":"value"}
 ```
-            </td>
-            <td>
+</td>
+<td>
 ```xml
-                    <name>value</name>
+  <name>value</name>
 ```
-            </td>
-        </tr>
-        <tr>
-            <td>Namespace with prefix can be declared.  </td>
-            <td>
-            xmlns:n1='http://namesapce1.com'
+</td>
+</tr>
+<tr>
+<td>Namespace with prefix can be declared.  </td>
+<td>
+  xmlns:n1='http://namesapce1.com'
+
 ```json
                     {"n1:name":"value"}
 ```
-            </td>
-            <td>
+ </td>
+<td>
 ```xml                    <n1:name xmlns:n1='http://namesapce1.com'>value</n1:name>
-```            </td>
-        </tr>
-        <tr>
-            <td>Namespace with prefix can be declared.  </td>
-            <td>
-            xmlns:n1='http://namesapce1.com'
+```
+</td>
+</tr>
+<tr>
+<td>Namespace with prefix can be declared.  </td>
+<td>
+      xmlns:n1='http://namesapce1.com'
 ```json
 {"n1:name":"value"}
 ```
-        </td>
-            <td>
+</td>
+<td>
 ```xml
                     <n1:name xmlns:n1='http://namesapce1.com'>value</n1:name>
 ```
-            </td>
-        </tr>
-        <tr>
-            <td>Nested objects are converted into parent-child elements  </td>
-            <td>
+</td>
+</tr>
+<tr>
+<td>Nested objects are converted into parent-child elements  </td>
+<td>
  ```json
 {"queryStbInfo":{"in0":"?","in1":"?"}}
 ```
-            </td>
-            <td>
+</td>
+<td>
 ```xml
                     <queryStbInfo><in0>?</in0><in1>?</in1></queryStbInfo>
 ```
-            </td>
-        </tr>
+</td>
+</tr>
 <tr>
 <td>Arrays are converted into a parent with repeating child elements</td>
 <td>
