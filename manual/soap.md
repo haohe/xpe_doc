@@ -5,7 +5,7 @@
 <h3>Configurations</h3>
 
 <table class="table table-striped">
-        <tr>
+ <tr>
             <th>Attribute</th>
             <th>Description</th>
             <th>Example</th>
@@ -40,47 +40,53 @@
         <tr>
             <td>JSON Objects will be converted into XML elements</td>
             <td>
-                <jsonSample>{"name":"value"}</jsonSample>
+```json
+                        {"name":"value"}
+```
             </td>
             <td>
-                <xmlSample>
+```xml
                     <name>value</name>
-                </xmlSample>
+```
             </td>
         </tr>
         <tr>
             <td>Namespace with prefix can be declared.  </td>
             <td>
             xmlns:n1='http://namesapce1.com'
-                <jsonSample>{"n1:name":"value"}</jsonSample>
+```json
+                    {"n1:name":"value"}
+```
             </td>
             <td>
-                <xmlSample>
-                    <n1:name xmlns:n1='http://namesapce1.com'>value</n1:name>
-                </xmlSample>
-            </td>
+```xml                    <n1:name xmlns:n1='http://namesapce1.com'>value</n1:name>
+```            </td>
         </tr>
         <tr>
             <td>Namespace with prefix can be declared.  </td>
             <td>
             xmlns:n1='http://namesapce1.com'
-                <jsonSample>{"n1:name":"value"}</jsonSample>
-            </td>
+```json
+{"n1:name":"value"}
+```
+        </td>
             <td>
-                <xmlSample>
+```xml
                     <n1:name xmlns:n1='http://namesapce1.com'>value</n1:name>
-                </xmlSample>
+```
             </td>
         </tr>
         <tr>
             <td>Nested objects are converted into parent-child elements  </td>
             <td>
-                <jsonSample>{"queryStbInfo":{"in0":"?","in1":"?"}}</jsonSample>
+ ```json
+{"queryStbInfo":{"in0":"?","in1":"?"}}
+```
             </td>
             <td>
-                <xmlSample>
+```xml
                     <queryStbInfo><in0>?</in0><in1>?</in1></queryStbInfo>
-                </xmlSample>
+```
             </td>
         </tr>
         <tr>
@@ -200,9 +206,9 @@
             </td>
         </tr>
         
-        <tr>
-            <td>Repeating XML elements will be converted into JSON array if the schema indicates so</td>
-            <td>
+<tr>
+<td>Repeating XML elements will be converted into JSON array if the schema indicates so</td>
+<td>
 ```xml                
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <soap:Body>
