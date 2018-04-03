@@ -78,8 +78,7 @@
     
 <h3>Body data structure when type is 1 (JSON) </h3>
     
-    
-    <table class="table table-striped">
+<table class="table table-striped">
         <tr>
             <th>Attribute</th>
             <th>Description</th>
@@ -122,8 +121,9 @@
            <td>string</td>
            <td>N</td>
         </tr>
-    </table>
+</table>
 
 ### Body data structure when type is 2 (SYS) 
 
- If not agreed previously, the body is simply three bytes: 'SYS'
+ If not agreed previously, the body is simply three bytes: 'SYS' or pre-agreed format between parties.
+ 
