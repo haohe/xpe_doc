@@ -22,6 +22,12 @@
             <th>Description</th>
         </tr>
         <tr>
+            <td>char</td>
+            <td>1</td>
+            <td>c</td>
+            <td>0 to 127. '1' will be parsed and stored as 1</td>
+        </tr>
+        <tr>
             <td>byte</td>
             <td>1</td>
             <td>b</td>
@@ -139,6 +145,10 @@
         <tr>
             <td>Maximum number of keys</td>
             <td>16384. Will be less subject to the usages of key values. Each key requires 4 bytes minimum.</td>
+        </tr>
+        <tr>
+            <td>Cross field index</td>
+            <td>Only the first 64 fields are supported and the each field cannot not be full-text or can be tokenized</td>
         </tr>
     </table>
 
@@ -335,7 +345,7 @@
         <li>Define the access policy in the DB config with defaultAccessPolicy="rwrwrw" format. The first two chars for owner, the second for group, and the rest is for others.</li>
     </ol>
      
-<h4>Indices</h4>
+<h4>Indexes</h4>
 
 <p>A DB is not very useful if one cannot search the DB. What makes XPE DB different is that we assume that a developer knows her data so she will be able to choose the most suitable index for it. The end result is that XPE DB is able to perform very fast
         queries typically at the cost of O(1) time. The performance is so high that traditional SQL based DB simply cannot match.</p>
@@ -361,6 +371,12 @@
                 tag^ratings.</td>
             <td>fields="{field^sortfield}..."</td>
             <td>fields="tag^ratings"</td>
+        </tr>
+        <tr>
+            <td>Cross field index</td>
+            <td>If you need to search across several fields, adding cross field indexes will significantly speed up your queires. Study your search patterns carefully and add cross-field indexes only when required.  </td>
+            <td>fields="{(field1,field2,...)^sortfield}..."</td>
+            <td>fields="(state,type)^id,(state,type,level)"</td>
         </tr>
     </table>
      
