@@ -2,9 +2,10 @@
 
 <h3>What is XPE DB and how it works?</h3>
 
-<p>XPE DB is designed from ground up using an event driven and log based architecture, which allows fast updates up to the maximum IO bandwidth of the underlying hardware storage. Even wiht modest hardware, XPE DB can achieve one million updates per seconds.</p>
+<p>XPE DB is designed from ground up using an event driven and log based architecture, which allows fast updates up to the maximum IO bandwidth of the underlying hardware storage. Even with modest hardware, XPE DB can achieve more than one million updates per seconds with subject to the number of indexes created.</p>
 <p>Inside XPE DB, even update generates a DB update event, which is published to a number of listeners. Some of those listeners are speciality indexers.</p>
-<p>Search is performed by one or more indexers. To achieve the best performance, one should consider the usage of a DB and then chooses the most suitable index.</p>
+<p>Search is performed by one or more indexers. To achieve the best performance, one should consider the usage of a DB and then chooses the most suitable indexes.</p>
+
 <h3>Data model</h3>
 
 <p>XPE DB stores records. A record has one more fields. Each field can be considered as a name value pair. The following data types are supported:</p>
@@ -185,6 +186,12 @@
             <td>If present, its value is set to the group id of the group to which this record belongs, currently, only the first 64 are supported. It will be extended to support more groups.</td>
         </tr>
     </table>
+
+<h4>Best practises for designing a schema</h4>
+
+1. Always prefer simple types with fixed length to types with variable length such as string.
+2. Prefer utf8 to string if you do not need to tokenize the string.
+
     
 <h4>Access Control</h4>
 
@@ -379,6 +386,13 @@
             <td>fields="(state,type)^id,(state,type,level)"</td>
         </tr>
     </table>
+     
+<h4>Best practises for creating indexes</h4>
+
+1. Do not add an index unless needed.
+2. Do not use sorting index unless needed.
+3. If you only need to get a record by the primary key, no index is needed.  Use the get pipe.
+4. Add a cross-field-index if searched alone, each field can return a large number of results.
      
 <h4>How to use</h4>
 
