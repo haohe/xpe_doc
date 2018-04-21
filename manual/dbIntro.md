@@ -79,13 +79,19 @@
             <td>String</td>
             <td>upto 1^16-2 bytes</td>
             <td>s</td>
-            <td>Binary blobs. Treated as is.</td>
+            <td>UTF8 encoded. Can be tokenized if it is Chinese.</td>
         </tr>
         <tr>
             <td>UTF8 String</td>
             <td>upto 1^16-2 bytes</td>
             <td>u</td>
-            <td>UTF8 encoded string</td>
+            <td>UTF8 encoded string. Will not be tokenized</td>
+        </tr>
+        <tr>
+            <td>Array</td>
+            <td>upto 1^16-2 bytes</td>
+            <td>a</td>
+            <td>Treated as a binary blob</td>
         </tr>
         <tr>
             <td>JSON</td>
