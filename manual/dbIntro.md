@@ -2,7 +2,7 @@
 
 <h3>What is XPE DB and how it works?</h3>
 
-<p>XPE DB is designed from ground up using an event driven and log based architecture, which allows fast updates up to the maximum IO bandwidth of the underlying hardware storage. Even with modest hardware, XPE DB can achieve more than one million updates per seconds with subject to the number of indexes created.</p>
+<p>XPE DB is designed from ground up using an event driven and log based architecture, which allows fast updates up to the maximum IO bandwidth of the underlying hardware storage. Even with modest hardware, XPE DB can achieve more than one million updates per seconds, subject to the number of indexes created.</p>
 <p>Inside XPE DB, even update generates a DB update event, which is published to a number of listeners. Some of those listeners are speciality indexers.</p>
 <p>Search is performed by one or more indexers. To achieve the best performance, one should consider the usage of a DB and then chooses the most suitable indexes.</p>
 
