@@ -22,6 +22,7 @@
     
 * [References]
     * [MS Server](manual/ms.md)
+    * [Authentication and SSO](manual/auth.md)
     * [XPE DB](manual/dbIntro.md)
     * [XJWT](manual/jwt.md)
     * [DB Sync](manual/dbsync.md)
