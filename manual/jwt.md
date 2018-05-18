@@ -55,7 +55,29 @@
 <p>where aes256 is the AES256 encryption function, the random long is a randomly generated 8 byte long, body is the business data to be sent over, aes padding are additional characters for AES padding
         purpose.  The type defined previously indicates the structure of the body.
 </p>
-    
+
+<p> The aes256 function is typically created in Java:</p>
+ 
+```java
+ cipher = javax.crypto.Cipher.getInstance("AES/CBC/NoPadding");
+```
+
+<p>Padding is calculated using the following formula:
+
+```
+  byte padding = (byte)  ((16 - (( 8 + body length + 1) & 0xF)) & 0xF);
+```
+
+<p>So, suppose we have a message body whose length is 7, padding is 0 according to the above formula. Hence, we pad the output by one 0 and the data layout will look like: </p>
+  
+<pre>
+[rand number: 8 bytes][body: 7 bytes][0] = 16 bytes
+</pre>
+
+<p>If the body length is 16, then padding is  7.   Hence, we pad the output with eight 7. the data layout will be: </p>
+[rand number: 8 bytes][body: 16 bytes][7,7,7,7,7,7,7,7] = 32 bytes
+</p>
+
 <p>The raw strcutre is then base64 encoded</p>
 
 <h4>The signature</h4> 
