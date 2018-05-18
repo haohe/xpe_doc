@@ -88,7 +88,12 @@
         base64(HmacSHA256(based64(raw header) +'.' + base64 (raw payload)), secret key)
 </pre>
     
-    
+<p>One usually obtains a HmacSHA256 function in Java using the following code:
+  
+```java  
+  sha256_HMAC = javax.crypto.Mac.getInstance("HmacSHA256")
+```
+
 <h3>Verification and decryption </h3>
     
 <ol>
