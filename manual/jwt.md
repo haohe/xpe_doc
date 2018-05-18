@@ -1,8 +1,8 @@
-<h2>XPE JSON Web Token Specification</h2>
+<h2>eXtensible JSON Web Token Specification</h2>
   
 <h3>Introduction</h3>
   
-<p>XPE JSON Web Token (XJWT) is a simple and reliable cross domain SSO solution based on the popular JSON Web Token (JWT) approach.  However, it is not compatiable with the JWT defined in RFC 7519. 
+<p>eXtensible JSON Web Token (XJWT) is a simple and reliable cross domain SSO solution based on the popular JSON Web Token (JWT) approach.  However, it is not compatiable with the JWT defined in RFC 7519. 
   </p>
   
   <h3>The overall structure of XJWT </h3>
