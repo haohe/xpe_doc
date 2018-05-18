@@ -12,7 +12,7 @@
 
   <h4>The header</h4>
   
-  <p>The header has the following raw structure:</p>
+  <p>The header has the following raw structure in this version.  Future versions may include additional fields.  The specific structure of the header is defined by the value of the type field. </p>
   
   <pre>
       [expiry:long][type:byte][issuer id:long]
