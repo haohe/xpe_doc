@@ -70,13 +70,15 @@
 
 <p>So, suppose we have a message body whose length is 7, padding is 0 according to the above formula. Hence, we pad the output by one 0 and the data layout will look like: </p>
   
-<pre>
-[rand number: 8 bytes][body: 7 bytes][0] = 16 bytes
-</pre>
+```
+ [rand number: 8 bytes][body: 7 bytes][0] = 16 bytes
+```
 
 <p>If the body length is 16, then padding is  7.   Hence, we pad the output with eight 7. the data layout will be: </p>
+
+```
 [rand number: 8 bytes][body: 16 bytes][7,7,7,7,7,7,7,7] = 32 bytes
-</p>
+```
 
 <p>The raw strcutre is then base64 encoded</p>
 
@@ -85,7 +87,7 @@
 <p>The signature is computed as the following:</p>
     
 <pre>
-        base64(HmacSHA256(based64(raw header) +'.' + base64 (raw payload)), secret key)
+        base64(HmacSHA256(based64(raw header) +'.' + base64 (raw payload), secret key))
 </pre>
     
 <p>One usually obtains a HmacSHA256 function in Java using the following code:
@@ -100,7 +102,7 @@
         <li>The signature is vefified with the shared secret key, if not valid, the token is discarded.</li>
         <li>The header is base64 decoded and the expiry time is compared with the current time.  If it has elapsed, then the token is discarded. </li>
         <li>The header version is read and if it is not supported, then the token is invalid.</li>
-        <li>The payload is based64 decoded and decrypted using the shared aes key. The first 8 bytes of the decrypted messages and the paddings are discarded.  The remaining data is returned.</li>
+        <li>The payload is based64 decoded and decrypted using the shared aes key. The first 8 bytes of the decrypted messages and the paddings are discarded. The value of the last byte is read. Note that the value of the last byte incides the number of paddings we need to further remove.  For example, if the value is 8, we then need to remove the last 9 bytes. The remaining data is returned.</li>
 </ol>
     
 <h3>Body data structure when type is 1 (JSON) </h3>
