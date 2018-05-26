@@ -160,7 +160,8 @@ the ms package of a web application.  </p>
     
 <h4>Publisher configuration</h4> 
     <p>The following common attributes are shared by all subscribers:</p>
-    <table class="table table-striped table-bordered">
+    
+<table class="table table-striped table-bordered">
         <tr>
             <th>Name</th>
             <th>Description</th>
@@ -175,7 +176,7 @@ the ms package of a web application.  </p>
         </tr>
     </table>
     <p>The following combination of transport and protocols are allowed:</p>
-    <table class="table table-striped table-bordered">
+ <table class="table table-striped table-bordered">
         <tr>
             <th>Transport</th>
             <th>Protocol</th>
@@ -204,7 +205,8 @@ the ms package of a web application.  </p>
     
 <h4>Subscriber configuration</h4> 
     <p>The following common attributes are shared by all subscribers:</p>
-    <table class="table table-striped table-bordered">
+
+<table class="table table-striped table-bordered">
         <tr>
             <th>Name</th>
             <th>Description</th>
@@ -219,7 +221,7 @@ the ms package of a web application.  </p>
         </tr>
     </table>
     <p>The following combination of transport and protocols are allowed:</p>
-    <table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered">
         <tr>
             <th>Transport</th>
             <th>Protocol</th>
@@ -269,28 +271,54 @@ the ms package of a web application.  </p>
     
 <h4>Map Reducer</h4>
 
-    <p>A map reducer connects a subscriber and a publisher. It receives messages from a subscriber and then processes those messages and sends results to a publisher.</p>
+<p>A map reducer connects a subscriber and a publisher. It receives messages from a subscriber and then processes those messages and sends results to a publisher.</p>
     <p>A map reducer usually works in three stages:</p>
     <ol>
         <li>Filtering: conditions that determine if an incoming message is of interest for further processing.</li>
         <li>Mapping: map the incoming messages to an intermediate format for further processing. For example, grouping.</li>
         <li>Reducing: perform the final calculations and generate the output</li>
     </ol>
-    <xmlSample>
+    
+ ```xml 
         <mapReduce name="userEmail">
             <processor>
                 <![CDATA[ (function() { var o=n ull; function map(data) { // this method is called whenever a new message arrives // this method should check if the data is an item that is of interest, if so, map its attributes to a tempory object o=data; } function
                 process() { //this get calld after calling map, one should return an empty array if nothing to return, or an array of objects for downstream. if (o) { return [o]; } return []; } return { map: map, process: process }; }()); ]]>
             </processor>
         </mapReduce>
-    </xmlSample>
+```
+
+
+```javascript
+(function() { 
+    var o=null; 
+    function map(data) { 
+    // this method is called whenever a new message arrives 
+    // this method should check if the data is an item that is of interest, if so, map its attributes to a tempory object 
+    o=data; }      
     
-<h3>Examples</h3>
+    function process() { 
+    //this get calld after calling map, one should return an empty array if nothing to return, 
+    // or an array of objects for downstream. 
+    
+    if (o) { return [o]; } 
+    
+    
+    return []; 
+    } 
+    
+    return { map: map, process: process }; 
+    
+    }());
+		
+```
+
+### Examples 
 
     
 <h4>Creating a MS service for front end</h4>
 
-    <p>Problem: We need to implement specific business logics for form submission</p>
+<p>Problem: We need to implement specific business logics for form submission</p>
     <p>Solution:</p>
     <p>In your sitemap.xml, add the following:</p>
     <xmlSample>
