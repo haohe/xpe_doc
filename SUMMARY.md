@@ -21,6 +21,7 @@
     * [MS tutorial 1](tutorials/ms_1.md)
     
 * [References]
+    * [Releases](manual/releases.md)
     * [MS Server](manual/ms.md)
     * [Authentication and SSO](manual/auth.md)
     * [XPE DB](manual/dbIntro.md)
