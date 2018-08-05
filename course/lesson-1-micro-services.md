@@ -26,6 +26,7 @@ Things to avoid:
 ### Exercises
 
 1. What is fat client technology?
+1. What is the difference between fat client and rich client technologies?
 2. What is dynamic web page technology?
 3. Please give examples of UI features and business logics
 
