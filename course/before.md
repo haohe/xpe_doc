@@ -10,8 +10,8 @@ This course will train you to become proficient at using XPE - the advanced plat
 ### Prerequisite
 
 1. You should have good knowledge of HTML5, JavaScript and CSS
-2. You should have basic knowledge of XML
-3. You should have a computer running Windows, or MacOS, or Linux
+2. You should have basic knowledge of XML. You should know the difference between XML and HTML.
+3. You should have a computer running Windows, or MacOS, or Linux.  You should know how to run command line.
 
 ### Prepare your environment
 
