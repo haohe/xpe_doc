@@ -4,7 +4,7 @@
 
 <h3>Starting server and configurations</h3>
 
-    <table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered">
         <tr>
             <th>Name</th>
             <th>Default value</th>
@@ -29,10 +29,10 @@
     
 <h3>Introduction</h3>
 
-    <p>XPE Messaging Service (MS) is a messaing platform that provides reliable and high-performance messaging services for XPE web applications. It allows complex data processing to be done using JavaScript. With MS, one can delegate expensive data operatioins
+<p>XPE Messaging Service (MS) is a messaing platform that provides reliable and high-performance messaging services for XPE web applications. It allows complex data processing to be done using JavaScript. With MS, one can delegate expensive data operatioins
         to a cluster of backend hosts.</p>
-    <p>MS can be regarded as the backbone of web applications as it can integrate a large number of applications together and deliver messages to their recipients by utilising a varity of messaing patterns.</p>
-    <p>A MS is running in a separate process which can run on the same host as XPE web servers or on a remote host.  The relationship between XPE web servers and XPE MS serve is N-to-N.</p>
+<p>MS can be regarded as the backbone of web applications as it can integrate a large number of applications together and deliver messages to their recipients by utilising a varity of messaing patterns.</p>
+<p>A MS is running in a separate process which can run on the same host as XPE web servers or on a remote host.  The relationship between XPE web servers and XPE MS serve is N-to-N.</p>
     
 <h3>MS concepts</h3>
 
@@ -46,25 +46,25 @@ the ms package of a web application.  </p>
 
 <p>A model defines one or more topics.</p>
 
-    <p>A Topic has one publisher and 0 or more subscribers.</p>
-    <p>Because each subscriber may need to work at different pace so a topic needs to serve each subscriber with different messages.</p>
-    <p>A Topic stores all messages published by a publisher and provides searching services to its publisher and subscribers. It allows messaging to be resumed in the event of system crash.</p>
+<p>A Topic has one publisher and 0 or more subscribers.</p>
+<p>Because each subscriber may need to work at different pace so a topic needs to serve each subscriber with different messages.</p>
+<p>A Topic stores all messages published by a publisher and provides searching services to its publisher and subscribers. It allows messaging to be resumed in the event of system crash.</p>
 
 
 
     
 <h4>Message</h4>
 
-    <p>A message needs to be confirmed to a particular protocol so its recipients can understand it.</p>
-    <p>A message is less than 64 KB. Messages are usually sequenced so they can be traced. Unsequenced messages can be delivered but there is no guarantee that they will arrive at the destination.</p>
-    <p>The following protocols are supported:</p>
-    <ol>
+<p>A message needs to be confirmed to a particular protocol so its recipients can understand it.</p>
+<p>A message is less than 64 KB. Messages are usually sequenced so they can be traced. Unsequenced messages can be delivered but there is no guarantee that they will arrive at the destination.</p>
+<p>The following protocols are supported:</p>
+<ol>
         <li>DB log (dblog): a fast log based DB synchronisation protocol and allows two or more XPE DBs to be totally synchornised.</li>
         <li>Binary (binary): key-value pairs are encoded using a cache friendly format, which can be regarded as a binary version of JSON</li>
         <li>JSON (json): the standard UTF8 encoded JSON data format.</li>
         <li>XPE 2.0 XML (xpe20): key-value pairs encoded using XML.</li>
         <li>HEP convert (hepconvert): Special format for HEP resource data conversion</li>
-    </ol>
+</ol>
 
 
 <h4>Messaging</h4>
@@ -83,33 +83,33 @@ the ms package of a web application.  </p>
     
 <h4>Transport</h4>
 
-    <p>The transport is identified by the corresponding URI scheme or the transport attribute. The following transports are supported</p>
-    <ol>
+<p>The transport is identified by the corresponding URI scheme or the transport attribute. The following transports are supported</p>
+<ol>
         <li>HTTP 1.1 (http): used with Binary, JSON and XPE 2.0 XML. Example: http://example.com</li>
         <li>Web Socket(ws): used with Binary and DB log Example: ws://example.com/ws</li>
         <li>Local(no scheme): passing messages within the same MS. Example: localService</li>
-    </ol>
+</ol>
     
     
 <h4>Publisher</h4>
 
-    <p>A Publisher publishes messages from its src to a Topic. A topic is backed by an XPE DB so messages are persisted.</p>
-    <p>The main purpose of a publisher is to reconcile messages with its src.</p>
+<p>A Publisher publishes messages from its src to a Topic. A topic is backed by an XPE DB so messages are persisted.</p>
+<p>The main purpose of a publisher is to reconcile messages with its src.</p>
     
 <h4>Subscriber</h4>
 
-    <p>A subscriber listens to the arrival of messages on a Topic. It then converts the message to the format understood by its destination or performs a task.</p>
+<p>A subscriber listens to the arrival of messages on a Topic. It then converts the message to the format understood by its destination or performs a task.</p>
     
 <h3>Execution Model</h3>
 
-    <p>MS is event based. When an event detected by a publisher, it sends the event to the topic it belongs to and after performing necessary conversions.</p>
+<p>MS is event based. When an event detected by a publisher, it sends the event to the topic it belongs to and after performing necessary conversions.</p>
     
 <h3>Configuration Details</h3> 
     
 <h4>Configuration introduction</h4>
 
-    <p>Each MS application is configured using a MS XML document. The overall structure of the document is the following:</p>
-    <xmlSample>
+<p>Each MS application is configured using a MS XML document. The overall structure of the document is the following:</p>
+```xml
         <ms domain="">
             <topic>
                 <pub/><sub />*</topic>*
@@ -117,15 +117,17 @@ the ms package of a web application.  </p>
                 <script/>*</handler>
             <mapReudce/>*
             <template/>*</ms>
-    </xmlSample>
-    <p>Each MS application must only have one root level ms element and it must have a domain attribute. The value of the domain uniquely determines the application. It is a good practise to have the same file name and the domain.</p>
-    <p>The XML file is then copied to the "models" directory of the XPE MS server and the application will be loaded automatically by the server.</p>
+```
+
+<p>Each MS application must only have one root level ms element and it must have a domain attribute. The value of the domain uniquely determines the application. It is a good practise to have the same file name and the domain.</p>
+<p>The XML file is then copied to the "models" directory of the XPE MS server and the application will be loaded automatically by the server.</p>
     
 <h4>Topic configuration</h4>
 
-    <p>A topic is backed by a DB and consequently shares many of the attributes for configuring a DB. If a topic has the same name as a DB (without the .db suffix) defined in sitemap.xml, then the dict and primaryKey attributes do not need to be defined. For
+<p>A topic is backed by a DB and consequently shares many of the attributes for configuring a DB. If a topic has the same name as a DB (without the .db suffix) defined in sitemap.xml, then the dict and primaryKey attributes do not need to be defined. For
         example, if a DB's store name is students.db and a topic's name is students, then they are considered to be the same.</p>
-    <table class="table table-striped table-bordered">
+
+<table class="table table-striped table-bordered">
         <tr>
             <th>Name</th>
             <th>Mandatory</th>
@@ -152,12 +154,14 @@ the ms package of a web application.  </p>
             <td>The messaging protocol used by the subscriber will conform to when sending messages to the destination</td>
         </tr>
     </table>
-    <p>Once a topic is defined, its search is available in JavaScript under the domain object. For example, a topic called "users" will have its searcher available as domain.users. The search object has a search method that can then be called to search the
+
+<p>Once a topic is defined, its search is available in JavaScript under the domain object. For example, a topic called "users" will have its searcher available as domain.users. The search object has a search method that can then be called to search the
         DB.</p>
     
 <h4>Publisher configuration</h4> 
     <p>The following common attributes are shared by all subscribers:</p>
-    <table class="table table-striped table-bordered">
+    
+<table class="table table-striped table-bordered">
         <tr>
             <th>Name</th>
             <th>Description</th>
@@ -172,7 +176,7 @@ the ms package of a web application.  </p>
         </tr>
     </table>
     <p>The following combination of transport and protocols are allowed:</p>
-    <table class="table table-striped table-bordered">
+ <table class="table table-striped table-bordered">
         <tr>
             <th>Transport</th>
             <th>Protocol</th>
@@ -201,7 +205,8 @@ the ms package of a web application.  </p>
     
 <h4>Subscriber configuration</h4> 
     <p>The following common attributes are shared by all subscribers:</p>
-    <table class="table table-striped table-bordered">
+
+<table class="table table-striped table-bordered">
         <tr>
             <th>Name</th>
             <th>Description</th>
@@ -216,7 +221,7 @@ the ms package of a web application.  </p>
         </tr>
     </table>
     <p>The following combination of transport and protocols are allowed:</p>
-    <table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered">
         <tr>
             <th>Transport</th>
             <th>Protocol</th>
@@ -266,28 +271,54 @@ the ms package of a web application.  </p>
     
 <h4>Map Reducer</h4>
 
-    <p>A map reducer connects a subscriber and a publisher. It receives messages from a subscriber and then processes those messages and sends results to a publisher.</p>
+<p>A map reducer connects a subscriber and a publisher. It receives messages from a subscriber and then processes those messages and sends results to a publisher.</p>
     <p>A map reducer usually works in three stages:</p>
     <ol>
         <li>Filtering: conditions that determine if an incoming message is of interest for further processing.</li>
         <li>Mapping: map the incoming messages to an intermediate format for further processing. For example, grouping.</li>
         <li>Reducing: perform the final calculations and generate the output</li>
     </ol>
-    <xmlSample>
+    
+ ```xml 
         <mapReduce name="userEmail">
             <processor>
                 <![CDATA[ (function() { var o=n ull; function map(data) { // this method is called whenever a new message arrives // this method should check if the data is an item that is of interest, if so, map its attributes to a tempory object o=data; } function
                 process() { //this get calld after calling map, one should return an empty array if nothing to return, or an array of objects for downstream. if (o) { return [o]; } return []; } return { map: map, process: process }; }()); ]]>
             </processor>
         </mapReduce>
-    </xmlSample>
+```
+
+
+```javascript
+(function() { 
+    var o=null; 
+    function map(data) { 
+    // this method is called whenever a new message arrives 
+    // this method should check if the data is an item that is of interest, if so, map its attributes to a tempory object 
+    o=data; }      
     
-<h3>Examples</h3>
+    function process() { 
+    //this get calld after calling map, one should return an empty array if nothing to return, 
+    // or an array of objects for downstream. 
+    
+    if (o) { return [o]; } 
+    
+    
+    return []; 
+    } 
+    
+    return { map: map, process: process }; 
+    
+    }());
+		
+```
+
+### Examples 
 
     
 <h4>Creating a MS service for front end</h4>
 
-    <p>Problem: We need to implement specific business logics for form submission</p>
+<p>Problem: We need to implement specific business logics for form submission</p>
     <p>Solution:</p>
     <p>In your sitemap.xml, add the following:</p>
     <xmlSample>
