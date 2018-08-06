@@ -3,6 +3,7 @@
 ### Reading materials
 
 1. https://github.com/haohe/xpe_doc/blob/master/ppt/microservices_20170602.pptx
+2. [Architecture] (../tutorials/tutorial_0.md)
 
 ### Notes
 
