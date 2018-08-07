@@ -83,3 +83,8 @@ var app = new Vue({
 ```
 
 Now, click build and preview, you should see your vue application running.
+
+## Exercise
+
+Write your own todo application with what ever JS framework you like.  See http://todomvc.com/ for examples.
+
