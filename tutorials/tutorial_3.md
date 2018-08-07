@@ -119,15 +119,14 @@
 <p>The structure of a page is similar to that of a HTML page.  It has a head section, which contains all the head information for a page
     and all HTML head tags are supported.  Please note that all the head info defined in the common section will be copied all to pages.
 </p>        
-    
-    <h4>The structure of a template</h4>
+
+<h4>The structure of a template</h4>
     
 <p>A template file is just a logical structure of a page so it can reused by many pages with similar logical structure.
     The following example shows the template for all product pages:</p>
+
 ```xml
-     
-<content>
-    
+<content>    
 <head>
    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
    <title>XPE - the Cloud Development Platform for the Web</title>
@@ -164,7 +163,7 @@
 </content>
 ```
     
-<p>Again, the structure of a template mimics that of a HTML page.  It optionally has a head section so you can add commonly used javascript and css into this section.</p>
+Again, the structure of a template mimics that of a HTML page.  It optionally has a head section so you can add commonly used javascript and css into this section. 
     
 <p>Each div has an id, which uniquely identifies the div.  Notice the load tags used in each page declaration?  The load tag 
     instructs sitec to copy contents to the div with the specified id.</p>
