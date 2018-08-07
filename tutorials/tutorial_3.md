@@ -213,6 +213,14 @@ with an id.</p>
 <resources path="js" dir="js" />
 ```
 
+For individual file, we use "resource" element. For example:
+```xml
+    <resource src="html/hello.html" path="hello" />
+```
+
+The html/hello.html file maps to the "hello" URL path.
+
+
 <p>The above definition will automatically map all css files under your src/css directory to /css URL path.  For example, src/css/common.css will be mapped to /css/common.css .</p>
 
 <h4>Javascript framework</h4>
