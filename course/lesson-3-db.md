@@ -1,4 +1,4 @@
-#XPE DB
+# XPE DB
 
 You can clone the students_db project from:
 
