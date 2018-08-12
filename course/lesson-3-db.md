@@ -1,10 +1,12 @@
 # XPE DB
 
-You need to complete [tutorials/tutorial_4.md](Tutorial 4) before this lesson.
+You need to complete [Tutorial 4 ](../tutorials/tutorial_4.md) before this lesson.
 
 You also need to run the latest XPE image: xpedocker/xpe:latest
 
-You can clone the students_db project from:
+Detailed instructions can be found at https://hub.docker.com/r/xpedocker/xpe/
+
+Once you have the web IDE running on your local host, go to the IDE and clone the students_db project from:
 
 https://github.com/softtouchit/students_db.git
 
