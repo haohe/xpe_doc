@@ -1,4 +1,4 @@
-# XPE DB
+# XPE DB validators
 
 You need to complete [Tutorial 4 ](../tutorials/tutorial_4.md) before this lesson.
 
@@ -41,9 +41,21 @@ When storing data into DB, attackers can put JavaScript code into the DB. When d
 1. Ensure content is checked to be safe before storing it.
 2. Ensure content is safe before showing it from the DB on the client side.
 
-The first part can be easily done with the safehtml() validator, so our example becomes:
+The first step can be easily done with the safehtml() validator, so our example becomes:
 
 
 ```xml
      <service store="students.db" storeType="binary" primaryKey="id" fields="id,studentNo,name" dict="id,studentNo:s!,name:!,age:i,sex:!,created:t" seqKey="true" validators="studentNo:size(4,8),name:size(2,32),age:number(),sex:enum(M,F),*:safehtml()">
 ```
+
+The second step needs to be done on the browser side.  There are many solutions available. For instance, you can use:
+
+https://github.com/leizongmin/js-xss
+
+
+## DB built-in validaor summary
+
+|Validator|Applicable types|description|example
+|---------|----------------|-----------|---------
+|size(min,max)     |string,array    |total number of bytes must be within the given range| size(2,8) 
+|enum(... values) | all| value must be one of the given | enum('M','F') , enum(33,44,55) 
