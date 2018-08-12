@@ -59,3 +59,5 @@ https://github.com/leizongmin/js-xss
 |---------|----------------|-----------|---------
 |size(min,max)     |string,array    |total number of bytes must be within the given range| size(2,8) 
 |enum(... values) | all| value must be one of the given | enum('M','F') , enum(33,44,55) 
+|safehtml() |string,array| unsafe html contents will be rejected | safehtml() 
+|number(min,max) |byte,int,long,string|the input is an number and its value must be >= min and < max
