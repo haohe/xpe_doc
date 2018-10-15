@@ -382,8 +382,8 @@
         <tr>
             <td>Cross field index</td>
             <td>If you need to search across several fields, adding cross field indexes will significantly speed up your queires. Study your search patterns carefully and add cross-field indexes only when required.  </td>
-            <td>fields="{(field1,field2,...)^sortfield}..."</td>
-            <td>fields="(state,type)^id,(state,type,level)"</td>
+            <td>fields="{(field1+field2+...)^sortfield}..."</td>
+            <td>fields="(state+type)^id,(state+type+level)"</td>
         </tr>
     </table>
      
