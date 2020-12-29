@@ -7,7 +7,11 @@
   
   <h3>The overall structure of XJWT </h3>
   
-  <p>An XJWT has three parts: header, payload, and signature separated by two '.'.   </p>
+  <p>An XJWT has three parts: header, payload, and signature separated by two dots ('.') .   </p>
+  
+  <pre>
+    [header].[payload].[signature]
+  </pre>
 
   <h4>The header</h4>
   
@@ -103,8 +107,10 @@
         <li>The header version is read and if it is not supported, then the token is invalid.</li>
         <li>The payload is based64 decoded and decrypted using the shared aes key. The first 8 bytes of the decrypted messages and the paddings are discarded. The value of the last byte is read. Note that the value of the last byte incides the number of paddings we need to further remove.  For example, if the value is 8, we then need to remove the last 9 bytes. The remaining data is returned.</li>
 </ol>
+
+<h3>Body types </h3>
     
-<h3>Body data structure when type is 1 (JSON) </h3>
+<h4>Body data structure when type is 1 (JSON) </h4>
     
 <table class="table table-striped">
         <tr>
@@ -151,7 +157,10 @@
         </tr>
 </table>
 
-### Body data structure when type is 2 (SYS) 
+<h4> Body data structure when type is 2 (SYS) </h4>
 
  If not agreed previously, the body is simply three bytes: 'SYS' or pre-agreed format between parties.
  
+<h3>Key distribution</h3>
+
+Key distribution is out of scope for this specification.  Common practise is to distrubue shared keys via a trusted channel, which can be offline. 
